@@ -1,0 +1,25 @@
+version: "3.7"
+
+networks:
+  traefik_public:
+    external: true
+
+services:
+  whatsmyip:
+    env_file:
+      - ./.env
+
+    image: ${IMAGE_NAME}
+
+    hostname: ${HOST_NAME}
+
+    labels:
+      - traefik.http.routers.${ROUTER_NAME}.rule=Host(`${HOST_NAME}`)
+      - traefik.http.routers.${ROUTER_NAME}.entrypoints=https
+      - traefik.http.routers.${ROUTER_NAME}.tls=true
+      - traefik.http.routers.${ROUTER_NAME}.tls.certresolver=letsencrypt
+
+    networks:
+      - traefik_public
+
+    restart: always
