@@ -14,10 +14,10 @@ services:
     hostname: ${HOST_NAME}
 
     labels:
-      - traefik.http.routers.${ROUTER_NAME}.rule=Host(`${HOST_NAME}`)
-      - traefik.http.routers.${ROUTER_NAME}.entrypoints=https
-      - traefik.http.routers.${ROUTER_NAME}.tls=true
-      - traefik.http.routers.${ROUTER_NAME}.tls.certresolver=letsencrypt
+      - traefik.http.routers.${SERVICE_NAME}.rule=Host(`${HOST_NAME}`)
+      - traefik.http.routers.${SERVICE_NAME}.entrypoints=https
+      - traefik.http.routers.${SERVICE_NAME}.tls=true
+      - traefik.http.routers.${SERVICE_NAME}.tls.certresolver=letsencrypt
 
     networks:
       - traefik_public
