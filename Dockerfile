@@ -6,8 +6,11 @@ ADD *.go /build/
 
 WORKDIR /build
 
+RUN apk add --no-cache --update \
+	libtls-standalone
+RUN go env -w GO111MODULE=auto
 RUN go get -d -v
-RUN CGO_ENABLED=0 GOOS=linux go build -a -o main
+RUN go env -w CGO_ENABLED=0 && go build -a -o main
 
 
 
