@@ -1,4 +1,4 @@
-# Traefik Docker Compose
+# Traefik Service Docker Compose
 
 ## Usage
 
