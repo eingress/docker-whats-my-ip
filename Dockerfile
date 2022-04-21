@@ -1,4 +1,7 @@
-FROM golang:1.17-alpine as builder
+
+ARG GO_IMAGE_VERSION
+
+FROM golang:$GO_IMAGE_VERSION as builder
 
 RUN mkdir /build
 
