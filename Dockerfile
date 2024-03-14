@@ -9,11 +9,8 @@ ADD *.go /build/
 
 WORKDIR /build
 
-RUN go env -w GO111MODULE=auto
-RUN go get -d -v
+RUN go mod init eingress.io/m/v2
 RUN go env -w CGO_ENABLED=0 && go build -a -o main
-
-
 
 FROM scratch
 
