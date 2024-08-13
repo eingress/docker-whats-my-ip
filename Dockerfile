@@ -1,7 +1,7 @@
 
 ARG GO_IMAGE_VERSION
 
-FROM golang:$GO_IMAGE_VERSION as builder
+FROM golang:$GO_IMAGE_VERSION AS builder
 
 RUN mkdir /build
 
