@@ -8,7 +8,11 @@ import (
 
 func getIP(w http.ResponseWriter, r *http.Request) {
 	ip := r.Header.Get("Cf-Connecting-Ip")
-	io.WriteString(w, ip)
+
+	_, err := io.WriteString(w, ip)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 }
 
