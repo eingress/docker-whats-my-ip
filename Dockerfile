@@ -3,6 +3,8 @@ ARG GO_IMAGE_VERSION
 
 FROM golang:${GO_IMAGE_VERSION:-alpine} AS builder
 
+LABEL maintainer="Scott Mathieson <scott@eingress.io>"
+
 RUN mkdir /build
 
 ADD *.go /build/
