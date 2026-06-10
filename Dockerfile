@@ -7,19 +7,26 @@ LABEL maintainer="Scott Mathieson <scott@eingress.io>"
 
 RUN mkdir /build
 
-ADD *.go /build/
+COPY *.go /build/
+COPY go.mod /build/
+COPY cmd/ /build/cmd/
 
 WORKDIR /build
 
-RUN go mod init eingress.io/m/v2
-RUN go env -w CGO_ENABLED=0 && go build -a -o main
+RUN go env -w CGO_ENABLED=0 && \
+    go build -a -o main . && \
+    go build -a -o healthcheck ./cmd/healthcheck/
 
 FROM scratch
 
 WORKDIR /
 
 COPY --from=builder /build/main .
+COPY --from=builder /build/healthcheck .
 
 EXPOSE 10101
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+    CMD ["/healthcheck"]
 
 ENTRYPOINT ["/main"]
